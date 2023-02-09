@@ -1,16 +1,18 @@
-from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from django.http import HttpResponse
-import tensorflow as tf
+from image_predictor import ImagePredictor
+
+predict = ImagePredictor()
 
 
 def index(request):
     return HttpResponse({'-A kto to?': '-A ja.'})
 
 
-def digit_recognition(request):
+@api_view(['POST'])
+def recognize(request):
     if request.method == 'POST':
-        img_binary = request.files['img']
-        img_tensor = tf.image.decode_jpeg(img_binary)
-        img_gray = tf.image.rgb_to_grayscale(img_tensor)
-        img_resized = tf.image.resize(img_gray, (28, 28))
-        res =
+        pred, probs = predict(request.files['img'])
+        data = {'pred': pred, 'probs': probs}
+        return Response(data)

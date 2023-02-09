@@ -3,4 +3,5 @@ from app import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('recognize/', views.recognize, name='recognize')
 ]

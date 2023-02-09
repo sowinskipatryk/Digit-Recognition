@@ -1,0 +1,9 @@
+.canvas {
+    padding: 1rem;
+    border-radius: 12px;
+    background-color: #f8dfff;
+    display: flex;
+    width: 400px;
+    height: 400px;
+    margin-right: 5rem;
+  }
