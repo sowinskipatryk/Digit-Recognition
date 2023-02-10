@@ -4,8 +4,6 @@ import numpy as np
 import base64
 from PIL import Image
 
-PATH = "./model"
-
 
 def process_image(img_enc):
     img_bin = base64.b64decode(img_enc[img_enc.index(',') + 1:])
@@ -24,7 +22,6 @@ def process_image(img_enc):
 class ImagePredictor:
     def __init__(self):
         self.mhandler = ModelHandler()
-        self.mhandler.load_model(PATH)
         self.pred = None
         self.probs = []
 

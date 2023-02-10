@@ -7,6 +7,13 @@ const DrawableCanvas = (props) => {
   const canvasRef = useRef(null);
   const prevPos = useRef({ offsetX: 0, offsetY: 0 });
 
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    console.log('Clearing Drawing');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -20,24 +27,24 @@ const DrawableCanvas = (props) => {
     });
 
     canvas.addEventListener('mouseup', (e) => {
-      console.log('Stopped Drawing');
+      console.log('REQUEST SENT');
 
-      fetch('http://127.0.0.1:8000/recognize/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            image: canvas.toDataURL("image/jpg")
-          })
-        })
-        .then(response => response.json())
-        .then(data => {
-          updateData(data.probs, data.pred);
-        })
-        .then(() => {
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-        });
+      // fetch('http://127.0.0.1:8000/recognize/', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify({
+      //       image: canvas.toDataURL("image/jpg")
+      //     })
+      //   })
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     updateData(data.probs, data.pred);
+      //   })
+        // .then(() => {
+        //   clearCanvas();
+        // });
     });
 
     canvas.addEventListener('mousemove', (e) => {
@@ -57,11 +64,11 @@ const DrawableCanvas = (props) => {
 
   return (
     <div>
-    <canvas
-      className={styles.canvasBox}
-      ref={canvasRef}
-    />
-    <Button text="Clear canvas" context={ctx} canva={canvas} />
+      <canvas
+        className={styles.canvasBox}
+        ref={canvasRef}
+      />
+      <Button txt="Clear canvas" onClick={clearCanvas} />
     </div>
   );
 };

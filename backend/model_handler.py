@@ -1,5 +1,8 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
+import os
+
+PATH = "./model"
 
 
 class ModelHandler:
@@ -11,10 +14,10 @@ class ModelHandler:
         self.test_labels = None
         self.test_loss = None
         self.test_acc = None
-        # self.model = self.load_model(path)
-        # self.signature = self.model.signatures["serving_default"]
-        # self.inputs = self.signature.inputs
-        # self.outputs = self.signature.outputs
+        if os.path.exists(PATH):
+            self.load_model(PATH)
+        else:
+            self.build_model(PATH)
 
     def build_model(self, path):
         self.load_dataset()
