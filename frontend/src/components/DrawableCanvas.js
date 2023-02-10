@@ -1,7 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './DrawableCanvas.module.css';
+import Button from './Button';
 
-const DrawableCanvas = () => {
+const DrawableCanvas = (props) => {
+  const updateData = props.onPredict;
   const canvasRef = useRef(null);
   const prevPos = useRef({ offsetX: 0, offsetY: 0 });
 
@@ -19,6 +21,23 @@ const DrawableCanvas = () => {
 
     canvas.addEventListener('mouseup', (e) => {
       console.log('Stopped Drawing');
+
+      fetch('http://127.0.0.1:8000/recognize/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            image: canvas.toDataURL("image/jpg")
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          updateData(data.probs, data.pred);
+        })
+        .then(() => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+        });
     });
 
     canvas.addEventListener('mousemove', (e) => {
@@ -34,13 +53,16 @@ const DrawableCanvas = () => {
 
       prevPos.current = { offsetX: e.offsetX, offsetY: e.offsetY };
     });
-  }, []);
+  }, [updateData]);
 
   return (
+    <div>
     <canvas
       className={styles.canvasBox}
       ref={canvasRef}
     />
+    <Button text="Clear canvas" context={ctx} canva={canvas} />
+    </div>
   );
 };
 

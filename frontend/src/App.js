@@ -1,16 +1,22 @@
+import React, { useState } from 'react';
 import './App.css';
 import DrawableCanvas from './components/DrawableCanvas';
 import Chart from './components/Chart';
 
 function App() {
-
-  const PROBS = [12.2, 7.14, 3.16, 56.3, 0.0, 0.0, 4.3, 9.1, 1.6, 6.2]
-  const PRED = 3
   
+  const [probs, setProbs] = useState(Array.from({length: 10}, () => 50))
+  const [pred, setPred] = useState(-1)
+
+  const updateChart = ((newProbs, newPred) => {
+    setProbs(newProbs);
+    setPred(newPred);
+  });
+
   return (
     <div className="App">
-      <DrawableCanvas />
-      <Chart probsArray={PROBS} maxProb={PRED} />
+      <DrawableCanvas onPredict={updateChart} />
+      <Chart probsArray={probs} maxProb={pred} />
     </div>
   );
 }

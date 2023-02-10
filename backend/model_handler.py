@@ -1,27 +1,28 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
-import numpy as np
-
-PATH = "digit_recognition_model"
 
 
 class ModelHandler:
     def __init__(self):
         self.model = None
+        self.train_images = None
+        self.train_labels = None
+        self.test_images = None
+        self.test_labels = None
         self.test_loss = None
         self.test_acc = None
-        self.train_images = None
-        self.test_images = None
-        self.load_model(PATH)
+        # self.model = self.load_model(path)
+        # self.signature = self.model.signatures["serving_default"]
+        # self.inputs = self.signature.inputs
+        # self.outputs = self.signature.outputs
 
-    def build_model(self):
+    def build_model(self, path):
         self.load_dataset()
         self.reduce_values_range()
         self.create_model()
-        self.show_model_summary()
         self.compile_model()
         self.fit_model()
-        self.save_model(PATH)
+        self.save_model(path)
 
     def load_dataset(self):
         mnist_dataset = tf.keras.datasets.mnist
@@ -43,12 +44,10 @@ class ModelHandler:
                                               input_shape=(28, 28, 1)))
         self.model.add(tf.keras.layers.MaxPooling2D((2, 2)))
         self.model.add(tf.keras.layers.Conv2D(64, (3, 3), activation='relu'))
+        self.model.add(tf.keras.layers.MaxPooling2D((2, 2)))
         self.model.add(tf.keras.layers.Flatten())
         self.model.add(tf.keras.layers.Dense(64, activation='relu'))
         self.model.add(tf.keras.layers.Dense(10, activation='softmax'))
-
-    def show_model_summary(self):
-        print(self.model.summary())
 
     def compile_model(self):
         self.model.compile(optimizer='adam',
@@ -62,12 +61,16 @@ class ModelHandler:
                        validation_data=(self.test_images, self.test_labels))
 
     def save_model(self, path):
-        tf.saved_model.save(self.model, path)
+        self.model.save(path)
+
+    def model_summary(self):
+        print(self.model.summary())
 
     def load_model(self, path):
-        self.model = tf.saved_model.load(path)
+        self.model = tf.keras.models.load_model(path)
 
     def evaluate_model(self):
+        self.load_dataset()
         self.test_loss, self.test_acc = self.model.evaluate(self.test_images,
                                                             self.test_labels,
                                                             verbose=1)
