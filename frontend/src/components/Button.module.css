@@ -1,9 +1,15 @@
 .button {
-    padding: 1rem;
-    background-color: #4826b9;
+    background-color: #5c3ebd;
+    margin-top: 2rem;
     border-radius: 12px;
     text-align: center;
-    border: 1px black solid;
-    width: 400px;
-    height: 100%;
+    border: 2px white solid;
+    width: 432px;
+    height: 100px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.button:hover {
+    background-color: #4826b9;
 }

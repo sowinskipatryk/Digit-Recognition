@@ -1,13 +1,14 @@
 import React from "react";
 import ChartBar from "./ChartBar";
 import styles from './Chart.module.css';
+import Box from './Box';
 
 const Chart = (props) => {
   const probsArray = props.probsArray;
   const probMax = props.maxProb;
 
   return (
-    <div className={styles.chart}>
+    <Box className={styles.chart}>
       {probsArray.map((prob, index) => (
         <ChartBar
           key={index}
@@ -16,7 +17,7 @@ const Chart = (props) => {
           maxProbFlag={probMax === index ? true : false}
         />
       ))}
-    </div>
+    </Box>
   );
 };
 

@@ -5,6 +5,13 @@
     text-align: center;
     display: flex;
     justify-content: space-around;
-    width: 30%;
     height: 400px;
+    min-width: 432px;
   }
+
+  @media (max-width: 1195px) {
+    .chart {
+      margin: 2.25rem 0 4rem 0;
+      width: 432px;
+    }
+}

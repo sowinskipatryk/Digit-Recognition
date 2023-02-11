@@ -1,10 +1,10 @@
 import styles from './Button.module.css';
 
-function Button(props) {
+const Button = (props) => {
   
-    const {textBtn} = props
+    const textBtn = props.txt
 
-    return <button type="button" className={styles.button}>{textBtn}</button>
+    return <button type="button" className={styles.button} onClick={props.onClick}>{textBtn}</button>
   }
   
   export default Button;
