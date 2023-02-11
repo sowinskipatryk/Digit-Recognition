@@ -1,0 +1,9 @@
+.box {
+    width: 40%;
+}
+
+@media (max-width: 1195px) {
+    .box {
+      width: 60%;
+    }
+}
