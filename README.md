@@ -1,5 +1,5 @@
 # Digit Recognition App
-Application for digit recognition developed using Tensorflow model, Django on the backend and React on the frontend. <br/>
+App for digit recognition developed using Tensorflow model, Django on the backend and React on the frontend. <br/>
 To use the tool draw a digit from 0 to 9 on the drawable canvas. <br/>
 when the mouse button is released, the image of the digit is sent in a body of a request to the backend. <br/>
 Then the image is decoded, converted to greyscale, resized to 28x28 pixels etc. and finally passed to the model. <br/>
