@@ -7,7 +7,7 @@ from PIL import Image
 
 def process_image(img_enc):
     img_bin = base64.b64decode(img_enc[img_enc.index(',') + 1:])
-    # with open('image.jpg', 'wb') as f:
+    # with open('img_in.jpg', 'wb') as f:
     #     f.write(img_bin)
     img_tensor = tf.image.decode_jpeg(img_bin, channels=4)
     img_norm = tf.cast(img_tensor, tf.float32) / 255.0
@@ -15,6 +15,7 @@ def process_image(img_enc):
     img_gray = tf.image.rgb_to_grayscale(img_skipfirst)
     img_resized = tf.image.resize(img_gray, (28, 28))
     img_extrap = tf.where(img_resized > 0.1, 1, img_resized)
+    # tf.keras.preprocessing.image.save_img("img_out.jpg", img_extrap)
     img_expand = tf.expand_dims(img_extrap, axis=0)
     return img_expand
 

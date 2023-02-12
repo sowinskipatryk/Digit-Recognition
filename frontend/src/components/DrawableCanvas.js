@@ -38,27 +38,27 @@ const DrawableCanvas = (props) => {
     ctx.canvas.height = "432";
     ctx.strokeStyle = "#2e1680";
     ctx.fillStyle = "#2e1680";
+    ctx.lineWidth = 16;
+    ctx.lineCap = 'round';
 
     canvas.addEventListener('mousedown', (e) => {
-      console.log('Started Drawing');
+      // console.log('Started Drawing');
       prevPos.current = { offsetX: e.offsetX, offsetY: e.offsetY };
     });
 
     canvas.addEventListener('mouseup', (e) => {
-      console.log('Stopped Drawing');
+      // console.log('Stopped Drawing');
       fetchData();
-      console.log('REQUEST SENT')
     });
 
     canvas.addEventListener('mousemove', (e) => {
       if (e.buttons !== 1) return;
       
       ctx.beginPath();
-      ctx.lineWidth = 10;
-      ctx.lineCap = 'round';
       ctx.moveTo(prevPos.current.offsetX, prevPos.current.offsetY);
       ctx.lineTo(e.offsetX, e.offsetY);
       ctx.stroke();
+      // console.log('Drawing');
 
       prevPos.current = { offsetX: e.offsetX, offsetY: e.offsetY };
     });
