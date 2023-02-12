@@ -1,8 +1,31 @@
 .App {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  padding-top: 6rem;
-  flex-wrap: wrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:#555;
+  border-radius: 12px;
+  width: calc(20px + 16px + 400px + 16px + 20px + 16px + 520px + 16px + 20px);
+  margin: 0 auto;
+  border: 1px solid black;
+  height: calc(20px + 16px + 400px + 16px + 20px + 45.6px + 24px);
 }
 
+.predInfoText {
+  font-size: 1.25rem;
+  left: calc(400px + 20px + 16px + 20px + 16px);
+  position: absolute;
+  top: calc(20px + 16px + 400px + 20px);
+  width: 520px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: calc(20px + 16px + 400px + 16px + 20px + 16px + 520px + 16px + 20px);
+  margin-top: -50px;
+}

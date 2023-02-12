@@ -4,7 +4,7 @@ const Button = (props) => {
   
     const textBtn = props.txt
 
-    return <button type="button" className={styles.button} onClick={props.onClick}>{textBtn}</button>
+    return <button type="button" className={`${styles.button} ${props.className}`} onClick={props.onClick}>{textBtn}</button>
   }
   
   export default Button;

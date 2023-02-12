@@ -1,17 +1,14 @@
 .chart {
-    padding: 1rem;
     border-radius: 12px;
-    background-color: #f8dfff;
+    background-color: #add1fd;
     text-align: center;
     display: flex;
     justify-content: space-around;
+    position: absolute;
+    top: 20px;
+    left: calc(400px + 20px + 16px + 20px + 16px);
+    width: 520px;
     height: 400px;
-    min-width: 432px;
+    padding: 1rem;
+    border: 1px solid black;
   }
-
-  @media (max-width: 1195px) {
-    .chart {
-      margin: 2.25rem 0 4rem 0;
-      width: 432px;
-    }
-}

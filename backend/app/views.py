@@ -13,8 +13,9 @@ def index(request):
 
 @api_view(['GET', 'POST'])
 def recognize(request):
-    data = json.loads(request.body)
-    img = data['image']
-    pred, probs = predict(img)
-    data = {'pred': pred, 'probs': probs}
-    return Response(data)
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        img = data['image']
+        pred, probs = predict(img)
+        data = {'pred': pred, 'probs': probs}
+        return Response(data)

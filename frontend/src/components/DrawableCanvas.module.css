@@ -1,7 +1,21 @@
 .canvasBox {
     padding: 1rem;
     border-radius: 12px;
-    background-color: #f8dfff;
+    background-color: #add1fd;
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
     width: 400px;
     height: 400px;
+    border: 1px solid black;
+  }
+
+  .clearButton {
+    position: absolute;
+    left: calc(36px + 20px);
+    top: calc(20px + 16px + 400px + 20px);
+    width: calc(400px - 40px);
+    padding: 10px;
+    margin-top: 20px;
   }
